@@ -1,0 +1,30 @@
+nav{
+    background-color: #FDFFFC;
+    height: 80px;
+}
+.Logo{
+    width: 100px;
+    height: 140px;
+}
+@media(max-width:990px){
+    .Logo{
+        position: absolute;
+        top: -25px;
+    }
+}
+.container{
+    width: 100vw;
+}
+@media(max-width:992px){
+    #responsive-navbar-nav{
+        width: 100vw;
+        margin-top: 70px;
+        background-color: #FDFFFC;
+        z-index: 1;
+    }
+}
+.contenedorCarrito{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

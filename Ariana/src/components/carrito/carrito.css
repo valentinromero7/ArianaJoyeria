@@ -1,0 +1,11 @@
+.botonCarrito{
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FDFFFC;
+}
+.carrito{
+    font-size: 20px;
+    color: #011627;
+}

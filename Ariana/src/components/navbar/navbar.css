@@ -1,30 +1,59 @@
-nav{
-    background-color: #FDFFFC;
-    height: 80px;
-}
-.Logo{
-    width: 100px;
-    height: 140px;
-}
-@media(max-width:990px){
-    .Logo{
-        position: absolute;
-        top: -25px;
-    }
-}
-.container{
+header{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color:white;
     width: 100vw;
 }
-@media(max-width:992px){
-    #responsive-navbar-nav{
-        width: 100vw;
-        margin-top: 70px;
-        background-color: #FDFFFC;
-        z-index: 1;
-    }
+.logo{
+    z-index: 2;
+    width: 70px;
 }
-.contenedorCarrito{
+.link{
+    z-index: 2;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 15px;
+    color: black;
+    background-color:white;
+    margin-inline: 10px;
+}
+.link:hover{
+    color: black;
+}
+a.active{
+    color: rgb(31, 31, 69);
+    font-size: 23px;
+}
+
+nav{
+    width: 100vw;
+    height: 70px;
+    background-color:white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 20px;
+    justify-content: start;
     align-items: center;
+    text-align: center;
+} 
+.carrito{
+    background-color: white;
+    position: relative;
+    bottom: 60px;
+    width: 100vw;
+    margin-right: 20px;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    color: black;
+}
+
+.carrito:hover{
+    color: black;
+}
+svg{
+    background-color: white;
 }

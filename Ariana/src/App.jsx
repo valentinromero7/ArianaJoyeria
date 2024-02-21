@@ -1,28 +1,20 @@
 
 import './App.css'
-import Productos from './components/productos/productos'
+import Navbar from './components/navbar/navbar'
+import ItemDetailContainer from './components/itemDetailContainer/itemDetailContainer'
 import ItemListContainer from './components/itemListContainer/itemListContainer'
-import  NavBar from'./components/navbar/navbar'
+import {BrowserRouter, Routes , Route} from 'react-router-dom'
+
 function App() {
-
   return (
-    <> 
-      <NavBar />
-      <ItemListContainer greeting='Bienvenidos a Ariana Joyeria' />
-      <div className= "cards-container">
-                <Productos
-          img='/img/collar.jpg'
-          nombre='Collar'
-          precio={50000}
-        />
-        <Productos
-          img='/img/anillo.jpg'
-          nombre='anillo'
-          precio={40000}
-        />
-      </div>
-
-    </>
+    <BrowserRouter>
+      <Navbar/>
+      <Routes>
+        <Route path='/'element={<ItemListContainer/>}/>
+        <Route path='/categoria/:categoryId'element={<ItemListContainer/>}/>
+        <Route path='/itemDetailContainer/item'element={<ItemDetailContainer/>}/>
+      </Routes>
+    </BrowserRouter> 
   )
 }
 

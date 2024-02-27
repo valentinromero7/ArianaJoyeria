@@ -1,7 +1,6 @@
 import { useEffect,useState } from "react"
-import { Form, Link, useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import "./itemListContainer.css"
-
 import productosJson from '../productos/productos.json'
 
 function asyncMock(categoryId) {
@@ -35,7 +34,7 @@ export default function ItemListContainer () {
                 {productos.map((item) => (
                             <div className="cards">
                                 <img src={item.img} className="imagenProducto"/>
-                                <Link to= "/itemDetailContainer/item" className="linkDetail">
+                                <Link to= {`/item/${item.id}`} className="linkDetail">
                                     <h2 className="nombre-prod">{item.name}</h2>
                                 </Link>
                                 <p className="textos-chicos-cards">{item.description}</p>

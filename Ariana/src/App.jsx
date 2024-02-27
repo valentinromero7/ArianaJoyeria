@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path='/'element={<ItemListContainer/>}/>
         <Route path='/categoria/:categoryId'element={<ItemListContainer/>}/>
-        <Route path='/itemDetailContainer/item'element={<ItemDetailContainer/>}/>
+        <Route path='/item/:itemId'element={<ItemDetailContainer/>}/>
       </Routes>
     </BrowserRouter> 
   )

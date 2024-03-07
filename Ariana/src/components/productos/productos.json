@@ -1,6 +1,6 @@
 [
     {
-        "id" : 1,
+        "id" : "1",
         "name" : "Collar",
         "description" : "Collar de oro" , 
         "stock" : 10 ,
@@ -9,7 +9,7 @@
         "img" : "./img/collar.jpg"
     },
     {
-        "id" : 2,
+        "id" : "2",
         "name" : "Collar",
         "description" : "Collar de perlas" , 
         "stock" : 13 ,
@@ -18,25 +18,25 @@
         "img" : "./img/collar de perlas.jpg"
     },
     {
-        "id" : 3,
+        "id" : "3",
         "name" : "Reloj",
         "description" : "Reloj tressa" , 
         "stock" : 2 ,
         "price" : 50000 ,
-        "categoria" : "bolsos",
+        "categoria" : "relojes",
         "img" : "./img/reloj-tressa.jpg"
     },
     {
-        "id" : 4,
+        "id" : "4",
         "name" : "Reloj",
         "description" : "Reloj rolex" , 
         "stock" : 3 ,
         "price" : 10000000 ,
-        "categoria" : "bolsos",
+        "categoria" : "relojes",
         "img" : "./img/reloj-rolex.jpg"
     },
     {
-        "id" : 5,
+        "id" : "5",
         "name" : "Anillo",
         "description" : "Anillo de oro" , 
         "stock" : 40 ,
@@ -45,7 +45,7 @@
         "img" : "./img/anillo.jpg"
     },
     {
-        "id" : 6,
+        "id" : "6",
         "name" : "Anillo",
         "description" : "Anillo de plata" , 
         "stock" : 30 ,

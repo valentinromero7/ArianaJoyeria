@@ -1,40 +1,60 @@
-import React, { useEffect, useState} from 'react'
-import productosJson from '../productos/productos.json'
-import { useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useCart } from '../context/cartContext';
+import productosJson from '../productos/productos.json';
+import './itemDetailContainer.css';
+import ItemCount from '../itemCount/itemCount';
 
 function asyncMock(itemId) {
-    return new Promise ((resolve,reject)=>{
+    return new Promise((resolve, reject) => {
         setTimeout(() => {
             if (itemId === undefined) {
-                resolve(productosJson)
+                resolve(productosJson);
+            } else {
+                const productoFiltrado = productosJson.filter((item) => {
+                    return item.id === itemId;
+                });
+                resolve(productoFiltrado);
             }
-            else{
-                const productoFiltrado = productosJson.filter((item)=> {
-                    return item.id===itemId
-                })
-                resolve (productoFiltrado)
-            }
-        },1000);
-    })
+        }, 1000);
+    });
 }
-export default function itemDetailContainer(){
 
-    const {itemId}= useParams ()
-    const [producto,setProducto] = useState([])
+export default function ItemDetailContainer() {
+    const { itemId } = useParams();
+    const [producto, setProducto] = useState([]);
+    const { addItem } = useCart();
 
     useEffect(() => {
-        asyncMock(itemId).then((res) => setProducto(res))
-    },[itemId])
+        asyncMock(itemId).then((res) => setProducto(res));
+    }, [itemId]);
+
+    const handleAddToCart = (count) => {
+        if (count > 0) {
+            const selectedProduct = producto[0];
+            addItem(selectedProduct, count);
+            console.log(`Se agregaron ${count} unidades del producto "${selectedProduct?.name}" al carrito.`);
+        } else {
+            console.log("La cantidad debe ser mayor a cero.");
+        }
+    };    
+
     return (
         <main>
-            <section>
+            <section className='itemDetailContainer'>
                 {producto.map((item) => (
-                    <div>
-                        <h2>{item.name}</h2>
-                        <img src={item.img} className="imagenProducto"/>
+                    <div className='itemDetailContainerDiv' key={item.id}>
+                        <img src={`../${item.img}`} className="imagenProductoDetail" alt={item.name} />
+                        <div className='itemDetailDiv'>
+                            <h2 className='textoDetail'>{item.name}</h2>
+                            <p className='textoDetail'>{item.description}</p>
+                            <p className='textoDetail'>Precio: ${item.price}</p>
+                            <ItemCount maxStock={item.stock} onAdd={handleAddToCart} />
+                            <Link to="/" className="botonSalir">x</Link>
+                        </div>
                     </div>
                 ))}
             </section>
-        </main> 
-    )
+        </main>
+    );
 }

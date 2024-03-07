@@ -21,28 +21,28 @@ function asyncMock(categoryId) {
     })
 }
 
-export default function ItemListContainer () {
-    const {categoryId}=useParams()
-    const [productos, setProductos] = useState([])
+export default function ItemListContainer() {
+    const { categoryId } = useParams();
+    const [productos, setProductos] = useState([]);
 
     useEffect(() => {
-        asyncMock(categoryId).then((res) => setProductos (res))
-    }, [categoryId])
+        asyncMock(categoryId).then((res) => setProductos(res))
+    }, [categoryId]);
+
     return (
         <main>
-            <section className="item-list-container"> 
+            <section className="item-list-container">
                 {productos.map((item) => (
-                            <div className="cards">
-                                <img src={item.img} className="imagenProducto"/>
-                                <Link to= {`/item/${item.id}`} className="linkDetail">
-                                    <h2 className="nombre-prod">{item.name}</h2>
-                                </Link>
-                                <p className="textos-chicos-cards">{item.description}</p>
-                                <p className="textos-chicos-cards">${item.price}</p>
-                            </div>
+                    <div className="cards" key={item.id}>
+                        <img src={`../${item.img}`} className="imagenProducto" alt={item.name} />
+                        <Link to={`/item/${item.id}`} className="linkDetail">
+                            <h2 className="nombre-prod">{item.name}</h2>
+                        </Link>
+                        <p className="textos-chicos-cards">{item.description}</p>
+                        <p className="textos-chicos-cards">${item.price}</p>
+                    </div>
                 ))}
             </section>
         </main>
     )
 }
-

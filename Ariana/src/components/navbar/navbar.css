@@ -1,59 +1,56 @@
-header{
+header {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    background-color:white;
-    width: 100vw;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f3f2f0;
+    padding: 10px;
+    width: 100%; /* Cambiamos a porcentaje */
 }
-.logo{
-    z-index: 2;
+
+.logo {
     width: 70px;
 }
-.link{
-    z-index: 2;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+
+.link {
+    background-color:#f3f2f0;
     font-size: 15px;
-    color: black;
-    background-color:white;
+    color: #22333B;
     margin-inline: 10px;
 }
-.link:hover{
-    color: black;
+
+.link:hover {
+    color: #22333B;
 }
-a.active{
-    color: rgb(31, 31, 69);
+
+a.active {
+    color: rgb(16, 15, 36);
     font-size: 23px;
 }
 
-nav{
-    width: 100vw;
-    height: 70px;
-    background-color:white;
+nav {
+    background-color: #f3f2f0;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    font-size: 20px;
-    justify-content: start;
     align-items: center;
-    text-align: center;
-} 
-.carrito{
-    background-color: white;
-    position: relative;
-    bottom: 60px;
-    width: 100vw;
-    margin-right: 20px;
-    display: flex;
-    justify-content: end;
-    align-items: end;
-    color: black;
+    flex-grow: 1;
 }
 
-.carrito:hover{
-    color: black;
+.carrito {
+    border: none;
+    margin-left: auto;
+    margin-right: 10px; 
+    color: #22333B;
+    background-color: #f3f2f0;
+    font-size: 17px;
+}
+
+.carrito:hover {
+    border: none;
+    background-color: #f3f2f0;
+    color: #22333B;
 }
 svg{
-    background-color: white;
+    background-color: #f3f2f0;
+}
+.contadorCarrito{
+    background-color: #f3f2f0;
 }

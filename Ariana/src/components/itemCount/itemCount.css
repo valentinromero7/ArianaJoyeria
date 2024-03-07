@@ -1,0 +1,37 @@
+/* itemCount.css */
+.contadorContainer {
+    display: flex;
+    align-items: center;
+    background-color: #EAE0D5;
+}
+
+.contadorText {
+    margin-right: 10px;
+    background-color: #EAE0D5;
+    font-size: 20px ;
+}
+
+.contadorButton {
+    background-color: #71a3ff;
+    color: #22333B;
+    border: none;
+    padding: 10px 10px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.contadorButton:disabled {
+    background-color: #EAE0D5;
+    cursor: not-allowed;
+}
+.agregarCarritoButton{
+    color: #EAE0D5;
+    margin-left: 20px;
+}

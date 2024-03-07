@@ -1,14 +1,18 @@
-*{background-color: #22333B;}
+*{
+    background-color: #22333B;
+}
 .item-list-container{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: space-evenly;
 }
 .cards{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    margin-inline: 30px;
+    margin-inline: 10px;
     width: 270px;
     height: 380;
     background-color: #EAE0D5;
@@ -17,6 +21,9 @@
     margin-top: 30px;
 }
 .nombre-prod{
+    font-size: 30px;
+    padding: 2px;
+    border: solid 1px;
     border-radius: 15px;
     color: #22333B;
     background-color: #EAE0D5;

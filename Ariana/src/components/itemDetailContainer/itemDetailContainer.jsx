@@ -7,7 +7,7 @@ import ItemCount from '../itemCount/itemCount';
 
 export default function ItemDetailContainer() {
     const { itemId } = useParams();
-    const [producto, setProducto] = useState();
+    const [item, setItem] = useState();
     const { addItem } = useCart();
 
     useEffect(() => {
@@ -17,7 +17,10 @@ export default function ItemDetailContainer() {
                 const productoRef = doc(db, "productos", itemId);
                 const productoSnapshot = await getDoc(productoRef);
                 if (productoSnapshot.exists()) {
-                    return { id: productoSnapshot.id, ...productoSnapshot.data() };
+                    // El documento existe, entonces puedes acceder a sus datos
+                    const productoData = { id: productoSnapshot.id, ...productoSnapshot.data() };
+                    console.log("Producto encontrado:", productoData);
+                    return productoData;
                 } else {
                     console.log("No se encontró ningún producto con el ID especificado:", itemId);
                     return null; // Devolver null cuando el producto no existe
@@ -28,9 +31,9 @@ export default function ItemDetailContainer() {
             }
         };
     
-        fetchProducto().then(producto => {
-            if (producto) {
-                setProducto(producto);
+        fetchProducto().then(item => {
+            if (item) {
+                setItem(item);
             }
         });
     
@@ -39,28 +42,28 @@ export default function ItemDetailContainer() {
     
 
     const handleAddToCart = (count) => {
-        if (count > 0 && producto) {
-            addItem(producto, count);
-            console.log(`Se agregaron ${count} unidades del producto "${producto.name}" al carrito.`);
+        if (count > 0 && item) {
+            addItem(item, count);
+            console.log(`Se agregaron ${count} unidades del producto "${item.name}" al carrito.`);
         } else {
             console.log("La cantidad debe ser mayor a cero o el producto no está disponible.");
         }
     };
 
-    if (!producto) {
+    if (!item) {
         return <p>Cargando producto...</p>;
     }
 
     return (
         <main>
             <section className='itemDetailContainer'>
-                <div className='itemDetailContainerDiv' key={producto.id}>
-                    <img src={`../${producto.img}`} className="imagenProductoDetail" alt={producto.name} />
+                <div className='itemDetailContainerDiv' key={item.id}>
+                    <img src={`../${item.img}`} className="imagenProductoDetail" alt={item.name} />
                     <div className='itemDetailDiv'>
-                        <h2 className='textoDetail'>{producto.name}</h2>
-                        <p className='textoDetail'>{producto.description}</p>
-                        <p className='textoDetail'>Precio: ${producto.price}</p>
-                        <ItemCount maxStock={producto.stock} onAdd={handleAddToCart} />
+                        <h2 className='textoDetail'>{item.name}</h2>
+                        <p className='textoDetail'>{item.description}</p>
+                        <p className='textoDetail'>Precio: ${item.price}</p>
+                        <ItemCount maxStock={item.stock} onAdd={handleAddToCart} />
                         <Link to="/" className="botonSalir">x</Link>
                     </div>
                 </div>

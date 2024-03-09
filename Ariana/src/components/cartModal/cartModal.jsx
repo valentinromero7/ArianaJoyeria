@@ -1,25 +1,41 @@
 import React, { useState } from 'react';
 import './cartModal.css';
 import { useCart } from '../context/cartContext';
+import { getFirestore, collection, addDoc, Timestamp } from "firebase/firestore";
 
 const CartModal = ({ isOpen, onClose }) => {
-    const { cart, clearCart } = useCart(); 
-    const [paymentSuccess, setPaymentSuccess] = useState(false); 
+    const { cart, clearCart } = useCart();
+    const [paymentSuccess, setPaymentSuccess] = useState(false);
+    const [paymentError, setPaymentError] = useState(null);
 
     const calculateProductTotal = (item) => {
         return item.quantity * item.price;
     };
 
-    const handlePay = () => {
-        setTimeout(() => {
+    const handlePay = async () => {
+        try {
+            const db = getFirestore();
+            const ordersCollectionRef = collection(db, "orders");
+
+            const order = {
+                items: cart,
+                total: cart.reduce((total, item) => total + calculateProductTotal(item), 0),
+                createdAt: Timestamp.fromDate(new Date())
+            };
+
+            await addDoc(ordersCollectionRef, order);
             setPaymentSuccess(true);
             clearCart();
-        }, 2000);
+        } catch (error) {
+            console.error("Error processing payment:", error);
+            setPaymentError("Error al procesar el pago. Por favor, inténtalo de nuevo más tarde.");
+        }
     };
 
     const closeModal = () => {
         onClose();
-        setPaymentSuccess(false); 
+        setPaymentSuccess(false);
+        setPaymentError(null);
     };
 
     return (
@@ -34,6 +50,7 @@ const CartModal = ({ isOpen, onClose }) => {
                     ) : (
                         <>
                             <h2>Carrito de compras</h2>
+                            {paymentError && <p className="payment-error">{paymentError}</p>}
                             <p>Total de productos: {cart.length}</p>
                             <ul className='ulModal'>
                                 {cart.map((item, id) => (

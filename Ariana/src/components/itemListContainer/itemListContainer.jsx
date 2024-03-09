@@ -1,32 +1,37 @@
-import { useEffect,useState } from "react"
-import { Link, useParams } from "react-router-dom"
-import "./itemListContainer.css"
-import productosJson from '../productos/productos.json'
-
-function asyncMock(categoryId) {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            if(categoryId===undefined) {
-                resolve(productosJson)
-            }
-            else{
-                const productosFiltrados = productosJson.filter((item) => {
-                    return item.categoria === categoryId
-                })
-
-                resolve(productosFiltrados)
-            }
-
-        }, 1000)
-    })
-}
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 
 export default function ItemListContainer() {
-    const { categoryId } = useParams();
     const [productos, setProductos] = useState([]);
+    const { categoryId } = useParams();
 
     useEffect(() => {
-        asyncMock(categoryId).then((res) => setProductos(res))
+
+        const db = getFirestore();
+        let productosRef = collection(db, "productos");
+
+        if (categoryId) {
+            productosRef = query (
+                productosRef,
+                where("category", "==", categoryId)
+            );
+        }
+
+        getDocs(productosRef)
+        .then((collection) => {
+            console.log("Documentos de la colección:", collection.docs);
+            const productos = collection.docs.map((doc) => {
+                const data = doc.data();
+                return data;
+            });
+            console.log("Productos mostrados:", productos);
+            setProductos(productos);
+        })
+        .catch((error) => {
+            console.error("Error al recuperar productos:", error);
+        });
+
     }, [categoryId]);
 
     return (
@@ -34,7 +39,7 @@ export default function ItemListContainer() {
             <section className="item-list-container">
                 {productos.map((item) => (
                     <div className="cards" key={item.id}>
-                        <img src={`../${item.img}`} className="imagenProducto" alt={item.name} />
+                        <img src={item.img}className="imagenProducto" alt={item.name} />
                         <Link to={`/item/${item.id}`} className="linkDetail">
                             <h2 className="nombre-prod">{item.name}</h2>
                         </Link>
@@ -44,5 +49,6 @@ export default function ItemListContainer() {
                 ))}
             </section>
         </main>
-    )
+    );
 }
+

@@ -49,7 +49,7 @@
         "name" : "Anillo",
         "description" : "Anillo de plata" , 
         "stock" : 30 ,
-        "price" : 100000 ,
+        "price" : 15000 ,
         "categoria" : "anillos",
         "img" : "./img/anillo de plata.jpg"
     }
